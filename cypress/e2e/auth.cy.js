@@ -1,7 +1,7 @@
 
 describe('Authentication', function () {
 
-    describe.skip('Positive tests', function () {
+    describe('Positive tests', function () {
 
         it('Sign in with valid credentials', function () {
 
@@ -24,7 +24,7 @@ describe('Authentication', function () {
 
     describe('Negative Tests', function () {
 
-        it.skip('Check the toaster', function () {
+        it('Check the toaster', function () {
 
             cy.visit('/user/login')
             cy.get('#normal_login_email')

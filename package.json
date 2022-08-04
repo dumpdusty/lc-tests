@@ -4,12 +4,14 @@
   "description": "Ui Automation tests for localcoding",
   "main": "index.js",
   "scripts": {
-    "cop": "npx cypress open"
+    "cop": "npx cypress open",
+    "crun": "npx cypress run --spec \"cypress/e2e/auth.cy.js\""
   },
   "keywords": [],
   "author": "dumpdusty",
   "license": "los-partizanes",
   "devDependencies": {
-    "cypress": "^10.3.1"
+    "cypress": "^10.3.1",
+    "cypress-xpath": "^2.0.1"
   }
 }

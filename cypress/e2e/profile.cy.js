@@ -15,7 +15,12 @@
 
 describe('Profile', function () {
     beforeEach(function () {
-
+        cy.get('#normal_login_email')
+            .type('dumpdusty2@gmail.com')
+        cy.get('#normal_login_password')
+            .type('Qwerty123')
+        cy.get('.login-form-button')
+            .click()
     })
 
     it('Daily report creation', function () {

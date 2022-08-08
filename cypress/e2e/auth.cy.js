@@ -1,12 +1,12 @@
 
 describe('Authentication', function () {
 
+    beforeEach(function(){
+        cy.visit('/user/login')
+    })
     describe('Positive tests', function () {
 
         it('Sign in with valid credentials', function () {
-
-            cy.visit('/user/login')
-
             cy.get('#normal_login_email')
                 .type('dumpdusty2@gmail.com')
             cy.get('#normal_login_password')
@@ -25,8 +25,6 @@ describe('Authentication', function () {
     describe('Negative Tests', function () {
 
         it('Check the toaster', function () {
-
-            cy.visit('/user/login')
             cy.get('#normal_login_email')
                 .type('dumpdusty2@gmail.com')
             cy.get('#normal_login_password')
@@ -36,8 +34,8 @@ describe('Authentication', function () {
             cy.get('.ant-notification-notice-message')
                 .should('have.text', 'Auth failed')
 
-            cy.visit('/user/login')
             cy.get('#normal_login_email')
+                .clear()
                 .type('test@test.test')
             cy.get('#normal_login_password')
                 .type('Qwerty123')
@@ -48,8 +46,6 @@ describe('Authentication', function () {
         });
 
         it('Check the warning messages', function () {
-
-            cy.visit('/user/login')
             cy.get('#normal_login_email')
                 .type('test')
             cy.xpath('//input[@id="normal_login_email"]/../../..//div[@class="ant-form-item-explain-error"]')

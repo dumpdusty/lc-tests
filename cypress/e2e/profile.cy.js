@@ -24,7 +24,25 @@ describe('Profile', function () {
     })
 
     it('Daily report creation', function () {
-        
+        const timeStamp = new Date().getTime()
+        const description = `${timeStamp} 012345678901234567890123456789`
+
+        cy.get('data-qa="dailyReportsBtn"')
+            .click()
+        cy.get('input[value="interview_preparation"]')
+            .click()
+        cy.get('.ant-input-number-input[placeholder="hours"]')
+            .type('1')
+        cy.get('[title="1"]')
+            .click()
+        cy.get('#description')
+            .type(description)
+        cy.get('button[type="submit"]')
+            .click()
+
+        cy.contains(description)
+            .should('be.visible')
+
     })
 })
 

@@ -24,21 +24,22 @@ describe('Authentication', function () {
 
     describe('Negative Tests', function () {
 
-        it('Check the toaster', function () {
+        it('Check the toaster with invalid email', function () {
             cy.get('#normal_login_email')
-                .type('dumpdusty2@gmail.com')
+                .type('test@test.test')
             cy.get('#normal_login_password')
-                .type('test')
+                .type('Qwerty123')
             cy.get('.login-form-button')
                 .click()
             cy.get('.ant-notification-notice-message')
                 .should('have.text', 'Auth failed')
+        });
 
+        it('Check the toaster with invalid password')
             cy.get('#normal_login_email')
-                .clear()
-                .type('test@test.test')
+                .type('dumpdusty2@gmail.com')
             cy.get('#normal_login_password')
-                .type('Qwerty123')
+                .type('test')
             cy.get('.login-form-button')
                 .click()
             cy.get('.ant-notification-notice-message')
@@ -66,5 +67,3 @@ describe('Authentication', function () {
 
         });
     })
-
-})

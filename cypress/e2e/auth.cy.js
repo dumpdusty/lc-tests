@@ -35,7 +35,7 @@ describe('Authentication', function () {
                 .should('have.text', 'Auth failed')
         });
 
-        it('Check the toaster with invalid password')
+        it('Check the toaster with invalid password', function(){
             cy.get('#normal_login_email')
                 .type('dumpdusty2@gmail.com')
             cy.get('#normal_login_password')
@@ -44,7 +44,7 @@ describe('Authentication', function () {
                 .click()
             cy.get('.ant-notification-notice-message')
                 .should('have.text', 'Auth failed')
-        });
+        })
 
         it('Check the warning messages', function () {
             cy.get('#normal_login_email')
@@ -66,4 +66,5 @@ describe('Authentication', function () {
 
 
         });
-    })
+    });
+})

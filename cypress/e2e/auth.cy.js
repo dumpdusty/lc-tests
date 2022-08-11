@@ -8,9 +8,9 @@ describe('Authentication', function () {
 
         it('Sign in with valid credentials', function () {
             cy.get('#normal_login_email')
-                .type('dumpdusty2@gmail.com')
+                .type(Cypress.env('EMAIL'))
             cy.get('#normal_login_password')
-                .type('Qwerty123')
+                .type(Cypress.env('PASSWORD'))
             cy.get('.login-form-button')
                 .click()
 
@@ -28,7 +28,7 @@ describe('Authentication', function () {
             cy.get('#normal_login_email')
                 .type('test@test.test')
             cy.get('#normal_login_password')
-                .type('Qwerty123')
+                .type(Cypress.env('PASSWORD'))
             cy.get('.login-form-button')
                 .click()
             cy.get('.ant-notification-notice-message')
@@ -37,7 +37,7 @@ describe('Authentication', function () {
 
         it('Check the toaster with invalid password', function(){
             cy.get('#normal_login_email')
-                .type('dumpdusty2@gmail.com')
+                .type(Cypress.env('EMAIL'))
             cy.get('#normal_login_password')
                 .type('test')
             cy.get('.login-form-button')

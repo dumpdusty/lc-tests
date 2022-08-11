@@ -15,24 +15,25 @@
 
 describe('Profile', function () {
     beforeEach(function () {
-        cy.get('#normal_login_email')
-            .type('dumpdusty2@gmail.com')
-        cy.get('#normal_login_password')
-            .type('Qwerty123')
-        cy.get('.login-form-button')
-            .click()
+        cy.visit('/')
+        window.localStorage.setItem('token', Cypress.env('TOKEN'))
+        window.localStorage.setItem('userId', Cypress.env('USER_ID'))
+        window.localStorage.setItem('userId', 'ru')
+        cy.visit(`/profile/${Cypress.env('USER_ID')}`)
     })
 
     it('Daily report creation', function () {
         const timeStamp = new Date().getTime()
-        const description = `${timeStamp} 012345678901234567890123456789`
+        const description = `${timeStamp} 123456789012345678901234567890`
 
-        cy.get('data-qa="dailyReportsBtn"')
+        cy.get('[data-qa="dailyReportsBtn"]')
             .click()
         cy.get('input[value="interview_preparation"]')
             .click()
         cy.get('.ant-input-number-input[placeholder="hours"]')
             .type('1')
+        cy.get('.ant-select-selector')
+            .click()
         cy.get('[title="1"]')
             .click()
         cy.get('#description')
@@ -40,7 +41,7 @@ describe('Profile', function () {
         cy.get('button[type="submit"]')
             .click()
 
-        cy.contains(description)
+        cy.xpath(`//div[contains(text(), "${timeStamp}")]`)
             .should('be.visible')
 
     })

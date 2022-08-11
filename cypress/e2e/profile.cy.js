@@ -15,18 +15,16 @@
 
 describe('Profile', function () {
     beforeEach(function () {
-        cy.visit('user/login')
-        cy.get('#normal_login_email')
-            .type('dumpdusty2@gmail.com')
-        cy.get('#normal_login_password')
-            .type('Qwerty123')
-        cy.get('.login-form-button')
-            .click()
+        cy.visit('/')
+        window.localStorage.setItem('token', Cypress.env('TOKEN'))
+        window.localStorage.setItem('userId', Cypress.env('USER_ID'))
+        window.localStorage.setItem('userId', 'ru')
+        cy.visit(`/profile/${Cypress.env('USER_ID')}`)
     })
 
     it('Daily report creation', function () {
         const timeStamp = new Date().getTime()
-        const description = `${timeStamp} 012345678901234567890123456789`
+        const description = `${timeStamp} 123456789012345678901234567890`
 
         cy.get('[data-qa="dailyReportsBtn"]')
             .click()

@@ -15,6 +15,7 @@
 
 describe('Profile', function () {
     beforeEach(function () {
+        cy.visit('user/login')
         cy.get('#normal_login_email')
             .type('dumpdusty2@gmail.com')
         cy.get('#normal_login_password')
@@ -27,12 +28,14 @@ describe('Profile', function () {
         const timeStamp = new Date().getTime()
         const description = `${timeStamp} 012345678901234567890123456789`
 
-        cy.get('data-qa="dailyReportsBtn"')
+        cy.get('[data-qa="dailyReportsBtn"]')
             .click()
         cy.get('input[value="interview_preparation"]')
             .click()
         cy.get('.ant-input-number-input[placeholder="hours"]')
             .type('1')
+        cy.get('.ant-select-selector')
+            .click()
         cy.get('[title="1"]')
             .click()
         cy.get('#description')
@@ -40,7 +43,7 @@ describe('Profile', function () {
         cy.get('button[type="submit"]')
             .click()
 
-        cy.contains(description)
+        cy.xpath(`//div[contains(text(), "${timeStamp}")]`)
             .should('be.visible')
 
     })

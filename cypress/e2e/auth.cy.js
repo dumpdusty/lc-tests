@@ -66,5 +66,17 @@ describe('Authentication', function () {
 
 
         });
+
+        it('Che ck the message for invalid email data', function () {
+            let arr = ['1', 'довшураи', 'fffg@']
+            for(let i=0; i<arr.length; i++){
+                cy.get('#normal_login_email')
+                    .type(arr[i])
+                cy.xpath('//input[@id="normal_login_email"]/../../..//div[@role="alert"]')
+                    .should('have.text', '\'email\' is not a valid email')
+                cy.get('#normal_login_email')
+                    .clear()
+            }
+        })
     });
 })

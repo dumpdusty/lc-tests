@@ -67,7 +67,7 @@ describe('Authentication', function () {
 
         });
 
-        it('Check the message for invalid email data', function () {
+        it('Che ck the message for invalid email data', function () {
             let arr = ['1', 'довшураи', 'fffg@']
             for(let i=0; i<arr.length; i++){
                 cy.get('#normal_login_email')

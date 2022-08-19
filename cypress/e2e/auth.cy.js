@@ -49,13 +49,6 @@ describe('Authentication', function () {
         it('Check the warning messages', function () {
             cy.get('#normal_login_email')
                 .type('test')
-            cy.get('#normal_login_email')
-                .parents('div[class="ant-col ant-form-item-control"]')
-                .find('div[class="ant-form-item-explain-error"]')
-                .should('contain', '\'email\' is not a valid email')
-
-            cy.get('#normal_login_email')
-                .type('test')
                 .clear()
             cy.get('#normal_login_email')
                 .parents('div[class="ant-col ant-form-item-control"]')
@@ -73,15 +66,15 @@ describe('Authentication', function () {
 
         });
 
-        it('Che ck the message for invalid email data', function () {
-            let arr = ['1', 'довшураи', 'fffg@']
+        it.only('Che ck the message for invalid email data', function () {
+            let arr = ['1', 'довшураи', 'fffg@', 'test']
             for(let i=0; i<arr.length; i++){
                 cy.get('#normal_login_email')
                     .type(arr[i])
                 cy.get('#normal_login_email')
                     .parents('div[class="ant-col ant-form-item-control"]')
                     .find('div[class="ant-form-item-explain-error"]')
-                    .should('have.text', '\'email\' is not a valid email')
+                    .should('contain', '\'email\' is not a valid email')
                 cy.get('#normal_login_email')
                     .clear()
             }

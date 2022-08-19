@@ -1,18 +1,15 @@
+import LoginPage from '../pages/login.page'
+import loginPage from "../pages/login.page";
 
 describe('Authentication', function () {
 
     beforeEach(function(){
-        cy.visit('/user/login')
+        LoginPage.open()
     })
     describe('Positive tests', function () {
 
         it('Sign in with valid credentials', function () {
-            cy.get('#normal_login_email')
-                .type(Cypress.env('EMAIL'))
-            cy.get('#normal_login_password')
-                .type(Cypress.env('PASSWORD'))
-            cy.get('.login-form-button')
-                .click()
+           loginPage.login(Cypress.env('EMAIL'), Cypress.env('PASSWORD'))
 
             cy.get('.ant-avatar-square')
                 .should('be.visible')
@@ -25,12 +22,9 @@ describe('Authentication', function () {
     describe('Negative Tests', function () {
 
         it('Check the toaster with invalid email', function () {
-            cy.get('#normal_login_email')
-                .type('test@test.test')
-            cy.get('#normal_login_password')
-                .type(Cypress.env('PASSWORD'))
-            cy.get('.login-form-button')
-                .click()
+
+            loginPage.login('test@test@test', Cypress.env('PASSWORD'))
+
             cy.get('.ant-notification-notice-message')
                 .should('have.text', 'Auth failed')
         });

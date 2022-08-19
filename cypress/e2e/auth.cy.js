@@ -35,35 +35,29 @@ describe('Authentication', function () {
         })
 
         it('Check the warning messages', function () {
-            cy.get('#normal_login_email')
+            LoginPage.inputEmail
                 .type('test')
                 .clear()
-            cy.get('#normal_login_email')
-                .parents('div[class="ant-col ant-form-item-control"]')
-                .find('div[class="ant-form-item-explain-error"]')
+            LoginPage.emailValidation
                 .should('contain', 'Required')
 
-            cy.get('#normal_login_password')
+            LoginPage.inputPassword
                 .type('test')
                 .clear()
-            cy.get('#normal_login_password')
-                .parents('div[class="ant-col ant-form-item-control"]')
-                .find('div[class="ant-form-item-explain-error"]')
+            LoginPage.passwordValidation
                 .should('contain', 'Required')
 
 
         });
 
-        it.only('Che ck the message for invalid email data', function () {
+        it('Che ck the message for invalid email data', function () {
             let arr = ['1', 'довшураи', 'fffg@', 'test']
             for(let i=0; i<arr.length; i++){
                 cy.get('#normal_login_email')
                     .type(arr[i])
-                cy.get('#normal_login_email')
-                    .parents('div[class="ant-col ant-form-item-control"]')
-                    .find('div[class="ant-form-item-explain-error"]')
+                LoginPage.emailValidation
                     .should('contain', '\'email\' is not a valid email')
-                cy.get('#normal_login_email')
+                LoginPage.inputEmail
                     .clear()
             }
         })

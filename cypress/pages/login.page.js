@@ -5,6 +5,13 @@ class LoginPage extends BasePage {
     get inputPassword() {return cy.get('#normal_login_password')}
     get buttonSignIn() {return cy.get('.login-form-button')}
     get toast() {return cy.get('.ant-notification-notice-message')}
+    get emailValidation() { return cy.get('#normal_login_email')
+        .parents('.ant-col.ant-form-item-control')
+        .find('.ant-form-item-explain-error')}
+    get passwordValidation() { return cy.get('#normal_login_password')
+        .parents('.ant-col.ant-form-item-control')
+        .find('.ant-form-item-explain-error')}
+
 
 
     open() {
@@ -13,7 +20,7 @@ class LoginPage extends BasePage {
 
     login(email, password){
         this.inputEmail.type(email)
-        this.inputPassword(password)
+        this.inputPassword.type(password)
         this.buttonSignIn.click()
     }
 }

@@ -49,20 +49,26 @@ describe('Authentication', function () {
         it('Check the warning messages', function () {
             cy.get('#normal_login_email')
                 .type('test')
-            cy.xpath('//input[@id="normal_login_email"]/../../..//div[@class="ant-form-item-explain-error"]')
-                .should('have.text', '\'email\' is not a valid email')
+            cy.get('#normal_login_email')
+                .parents('div[class="ant-col ant-form-item-control"]')
+                .find('div[class="ant-form-item-explain-error"]')
+                .should('contain', '\'email\' is not a valid email')
 
             cy.get('#normal_login_email')
                 .type('test')
                 .clear()
-            cy.xpath('//input[@id="normal_login_email"]/../../..//div[@class="ant-form-item-explain-error"]')
-                .should('have.text', 'Required')
+            cy.get('#normal_login_email')
+                .parents('div[class="ant-col ant-form-item-control"]')
+                .find('div[class="ant-form-item-explain-error"]')
+                .should('contain', 'Required')
 
             cy.get('#normal_login_password')
                 .type('test')
                 .clear()
-            cy.xpath('//input[@id="normal_login_password"]/../../..//div[@class="ant-form-item-explain-error"]')
-                .should('have.text', 'Required')
+            cy.get('#normal_login_password')
+                .parents('div[class="ant-col ant-form-item-control"]')
+                .find('div[class="ant-form-item-explain-error"]')
+                .should('contain', 'Required')
 
 
         });
@@ -72,7 +78,9 @@ describe('Authentication', function () {
             for(let i=0; i<arr.length; i++){
                 cy.get('#normal_login_email')
                     .type(arr[i])
-                cy.xpath('//input[@id="normal_login_email"]/../../..//div[@role="alert"]')
+                cy.get('#normal_login_email')
+                    .parents('div[class="ant-col ant-form-item-control"]')
+                    .find('div[class="ant-form-item-explain-error"]')
                     .should('have.text', '\'email\' is not a valid email')
                 cy.get('#normal_login_email')
                     .clear()

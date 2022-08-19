@@ -1,5 +1,5 @@
 import LoginPage from '../pages/login.page'
-import loginPage from "../pages/login.page";
+import ProfilePage from "../pages/profile.page";
 
 describe('Authentication', function () {
 
@@ -9,9 +9,9 @@ describe('Authentication', function () {
     describe('Positive tests', function () {
 
         it('Sign in with valid credentials', function () {
-           loginPage.login(Cypress.env('EMAIL'), Cypress.env('PASSWORD'))
+           LoginPage.login(Cypress.env('EMAIL'), Cypress.env('PASSWORD'))
 
-            cy.get('.ant-avatar-square')
+            ProfilePage.iconAvatar
                 .should('be.visible')
             cy.location('pathname')
                 .should('include', 'profile')
@@ -23,21 +23,15 @@ describe('Authentication', function () {
 
         it('Check the toaster with invalid email', function () {
 
-            loginPage.login('test@test@test', Cypress.env('PASSWORD'))
-
-            cy.get('.ant-notification-notice-message')
-                .should('have.text', 'Auth failed')
+            LoginPage.login('test@test.test', Cypress.env('PASSWORD'))
+            LoginPage.toast
+                .should('contain', 'Auth failed')
         });
 
         it('Check the toaster with invalid password', function(){
-            cy.get('#normal_login_email')
-                .type(Cypress.env('EMAIL'))
-            cy.get('#normal_login_password')
-                .type('test')
-            cy.get('.login-form-button')
-                .click()
-            cy.get('.ant-notification-notice-message')
-                .should('have.text', 'Auth failed')
+            LoginPage.login(Cypress.env('EMAIL'), '12345')
+            LoginPage.toast
+                .should('contain', 'Auth failed')
         })
 
         it('Check the warning messages', function () {

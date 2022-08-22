@@ -1,5 +1,5 @@
 import LoginPage from '../pages/login.page'
-import ProfilePage from "../pages/profile.page";
+import ProfilePage from "../pages/app/profile.page";
 
 describe('Authentication', function () {
 
@@ -34,7 +34,7 @@ describe('Authentication', function () {
                 .should('contain', 'Auth failed')
         })
 
-        it('Check the warning messages', function () {
+        it.only('Check the warning messages', function () {
             LoginPage.inputEmail
                 .type('test')
                 .clear()

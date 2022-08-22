@@ -8,4 +8,6 @@ module.exports = defineConfig({
     baseUrl : 'https://localcoding.us',
     excludeSpecPattern: ['cypress/e2e/1-getting-started/*.js', 'cypress/e2e/2-advanced-examples/*.js'],
   },
+  viewportWidth: 1600,
+  viewportHeight: 900,
 });

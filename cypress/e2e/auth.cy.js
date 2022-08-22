@@ -1,20 +1,17 @@
+import LoginPage from '../pages/login.page'
+import ProfilePage from "../pages/app/profile.page";
 
 describe('Authentication', function () {
 
     beforeEach(function(){
-        cy.visit('/user/login')
+        LoginPage.open()
     })
     describe('Positive tests', function () {
 
         it('Sign in with valid credentials', function () {
-            cy.get('#normal_login_email')
-                .type(Cypress.env('EMAIL'))
-            cy.get('#normal_login_password')
-                .type(Cypress.env('PASSWORD'))
-            cy.get('.login-form-button')
-                .click()
+           LoginPage.login(Cypress.env('EMAIL'), Cypress.env('PASSWORD'))
 
-            cy.get('.ant-avatar-square')
+            ProfilePage.iconAvatar
                 .should('be.visible')
             cy.location('pathname')
                 .should('include', 'profile')
@@ -25,57 +22,42 @@ describe('Authentication', function () {
     describe('Negative Tests', function () {
 
         it('Check the toaster with invalid email', function () {
-            cy.get('#normal_login_email')
-                .type('test@test.test')
-            cy.get('#normal_login_password')
-                .type(Cypress.env('PASSWORD'))
-            cy.get('.login-form-button')
-                .click()
-            cy.get('.ant-notification-notice-message')
-                .should('have.text', 'Auth failed')
+
+            LoginPage.login('test@test.test', Cypress.env('PASSWORD'))
+            LoginPage.toast
+                .should('contain', 'Auth failed')
         });
 
         it('Check the toaster with invalid password', function(){
-            cy.get('#normal_login_email')
-                .type(Cypress.env('EMAIL'))
-            cy.get('#normal_login_password')
-                .type('test')
-            cy.get('.login-form-button')
-                .click()
-            cy.get('.ant-notification-notice-message')
-                .should('have.text', 'Auth failed')
+            LoginPage.login(Cypress.env('EMAIL'), '12345')
+            LoginPage.toast
+                .should('contain', 'Auth failed')
         })
 
-        it('Check the warning messages', function () {
-            cy.get('#normal_login_email')
+        it.only('Check the warning messages', function () {
+            LoginPage.inputEmail
                 .type('test')
                 .clear()
-            cy.get('#normal_login_email')
-                .parents('div[class="ant-col ant-form-item-control"]')
-                .find('div[class="ant-form-item-explain-error"]')
+            LoginPage.emailValidation
                 .should('contain', 'Required')
 
-            cy.get('#normal_login_password')
+            LoginPage.inputPassword
                 .type('test')
                 .clear()
-            cy.get('#normal_login_password')
-                .parents('div[class="ant-col ant-form-item-control"]')
-                .find('div[class="ant-form-item-explain-error"]')
+            LoginPage.passwordValidation
                 .should('contain', 'Required')
 
 
         });
 
-        it.only('Che ck the message for invalid email data', function () {
+        it('Che ck the message for invalid email data', function () {
             let arr = ['1', 'довшураи', 'fffg@', 'test']
             for(let i=0; i<arr.length; i++){
                 cy.get('#normal_login_email')
                     .type(arr[i])
-                cy.get('#normal_login_email')
-                    .parents('div[class="ant-col ant-form-item-control"]')
-                    .find('div[class="ant-form-item-explain-error"]')
+                LoginPage.emailValidation
                     .should('contain', '\'email\' is not a valid email')
-                cy.get('#normal_login_email')
+                LoginPage.inputEmail
                     .clear()
             }
         })

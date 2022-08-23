@@ -13,6 +13,8 @@
 //1. %TIMESTAMP% is visible
 
 
+import ProfilePage from "../pages/app/profile.page";
+
 describe('Profile', function () {
     beforeEach(function () {
         cy.login(Cypress.env('TOKEN'), Cypress.env('USER_ID'))
@@ -71,6 +73,8 @@ describe('Profile', function () {
         )
         cy.reload()
 
+        ProfilePage.headerCoursesProgress.should('be.visible')
+        ProfilePage.courseProgress.should('contain', '26')
     })
 })
 

@@ -29,5 +29,5 @@ Cypress.Commands.add('login', (token, userId) => {
     cy.visit('/')
     window.localStorage.setItem('token', token)
     window.localStorage.setItem('userId', userId)
-    window.localStorage.setItem('userId', 'ru')
+    window.localStorage.setItem('lang', 'ru')
 })

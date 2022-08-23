@@ -1,6 +1,6 @@
 import MainPage from "../pages/app/main.page";
-import intQuestPage from "../pages/app/int-quest.page";
-import coursePage from "../pages/app/course.page";
+import IntQuestPage from "../pages/app/int-quest.page";
+import CoursePage from "../pages/app/course.page";
 import DiaryPage from "../pages/app/diary.page";
 import GroupsPage from "../pages/app/groups.page";
 import ChallengesPage from "../pages/app/challenges.page";
@@ -12,13 +12,13 @@ describe('Navigation', function () {
         cy.login(Cypress.env('TOKEN'), Cypress.env('USER_ID'))
         cy.reload()
     })
-    it('Courses page opens', function () {
+    it.only('Courses page opens', function () {
         MainPage.navBar.linkCourses.click()
         cy.location('pathname').should('contain', 'course')
     })
     it('Course header exists', function () {
         MainPage.navBar.linkCourses.click()
-        coursePage.coursesHeader.should('contain', 'Interactive')
+        CoursePage.coursesHeader.should('contain', 'Interactive')
     })
 
     it('InterviewQuestions page opens', function () {
@@ -28,7 +28,7 @@ describe('Navigation', function () {
 
     it('InterviewQuestions header exists', function () {
         MainPage.navBar.linkInterviewQuestions.click()
-        intQuestPage.intquestHeader.should('contain', 'Interview')
+        IntQuestPage.intquestHeader.should('contain', 'Interview')
     })
 
     it('Diary page opens', function () {

@@ -19,7 +19,7 @@ describe('Profile', function () {
         cy.visit(`/profile/${Cypress.env('USER_ID')}`)
     })
 
-    it('Daily report creation', function () {
+    it.skip('Daily report creation', function () {
         const timeStamp = new Date().getTime()
         const description = `${timeStamp} 123456789012345678901234567890`
 
@@ -40,6 +40,36 @@ describe('Profile', function () {
 
         cy.xpath(`//div[contains(text(), "${timeStamp}")]`)
             .should('be.visible')
+
+    })
+
+    it('Courses in progress', function () {
+        cy.intercept(
+            'GET',
+            '/course/coursesProgress/*',
+            {
+                statusCode: 200,
+                body: {
+
+                    "message": "Get courses progress",
+                    "success": true,
+                    "fail": false,
+                    "payload": [
+                        {
+                            "_id": "6041d0f2cb79b3003a36d844",
+                            "completedLessons": 11,
+                            "totalLessons": 42,
+                            "course": {
+                                "_id": "5c140b2b42f6ea23059cbe8f",
+                                "name": "JavaScript Syntax"
+                            }
+                        }
+                    ]
+                }
+
+            }
+        )
+        cy.reload()
 
     })
 })

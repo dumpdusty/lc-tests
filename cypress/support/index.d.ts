@@ -5,6 +5,6 @@ declare namespace Cypress{
          * @example
          * cy,createTodo('new item')
          */
-        login(token: string, userId: string): Chainable<any>
+        signin(token: string, userId: string): Chainable<any>
     }
 }

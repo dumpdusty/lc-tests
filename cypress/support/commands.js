@@ -25,7 +25,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('login', (token, userId) => {
+Cypress.Commands.add('signin', (token, userId) => {
     cy.visit('/')
     window.localStorage.setItem('token', token)
     window.localStorage.setItem('userId', userId)

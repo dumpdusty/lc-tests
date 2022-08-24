@@ -17,7 +17,7 @@ import ProfilePage from "../pages/app/profile.page";
 
 describe('Profile', function () {
     beforeEach(function () {
-        cy.login(Cypress.env('TOKEN'), Cypress.env('USER_ID'))
+        cy.signin(Cypress.env('TOKEN'), Cypress.env('USER_ID'))
         cy.visit(`/profile/${Cypress.env('USER_ID')}`)
     })
 

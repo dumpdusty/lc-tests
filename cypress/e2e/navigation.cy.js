@@ -9,7 +9,7 @@ import GoalsPage from "../pages/app/goals.page";
 
 describe('Navigation', function () {
     beforeEach(function () {
-        cy.signin(Cypress.env('TOKEN'), Cypress.env('USER_ID'))
+        cy.signIn(Cypress.env('TOKEN'), Cypress.env('USER_ID'))
         cy.reload()
     })
 

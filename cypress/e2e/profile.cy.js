@@ -17,11 +17,11 @@ import ProfilePage from "../pages/app/profile.page";
 
 describe('Profile', function () {
     beforeEach(function () {
-        cy.signin(Cypress.env('TOKEN'), Cypress.env('USER_ID'))
+        cy.signIn(Cypress.env('TOKEN'), Cypress.env('USER_ID'))
         cy.visit(`/profile/${Cypress.env('USER_ID')}`)
     })
 
-    it.skip('Daily report creation', function () {
+    it('Daily report creation', function () {
         const timeStamp = new Date().getTime()
         const description = `${timeStamp} 123456789012345678901234567890`
 
